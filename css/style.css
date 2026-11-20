@@ -231,3 +231,8 @@ footer a:hover{color:var(--gold)}
 .mcard{border:1px solid var(--line);border-radius:var(--r);padding:2.2rem;background:#fff}
 @media(max-width:960px){.mgrid{grid-template-columns:1fr}}
 @media(max-width:620px){.page-head{height:260px}}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.err{display:none;margin-top:1rem;color:#a12a1f;font-weight:600}
+.err a{text-decoration:underline}
+form{position:relative}
+.btn:disabled{opacity:.7;cursor:wait}

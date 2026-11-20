@@ -19,20 +19,27 @@
     start();
   }
 
-  // enquiry form -> WhatsApp
+  // enquiry form -> FormSubmit (https://formsubmit.co) emails it to hello@farmog.in; WhatsApp link if it fails
   var form=document.getElementById('enquiry');
   if(form){
+    var ok=form.querySelector('.ok'),err=form.querySelector('.err'),btn=form.querySelector('button[type=submit]');
+    if(location.search.indexOf('sent=1')>-1)ok.style.display='block';
     form.addEventListener('submit',function(e){
       e.preventDefault();
-      var d=new FormData(form);
-      var msg='New enquiry from Farm Og website%0A'+
-        'Name: '+encodeURIComponent(d.get('name'))+'%0A'+
-        'Email: '+encodeURIComponent(d.get('email'))+'%0A'+
-        'Phone: '+encodeURIComponent(d.get('phone'))+'%0A'+
-        'Product: '+encodeURIComponent(d.get('product'))+'%0A'+
-        'Message: '+encodeURIComponent(d.get('message'));
-      window.open('https://wa.me/918976715225?text='+msg,'_blank','noopener');
-      document.querySelector('.ok').style.display='block';
+      ok.style.display='none';err.style.display='none';
+      var d=new FormData(form),data={};
+      d.forEach(function(v,k){data[k]=v});
+      var label=btn.innerHTML;btn.disabled=true;btn.textContent='Sending…';
+      function fail(){
+        var wa='https://wa.me/918976715225?text='+encodeURIComponent(['New enquiry from Farm Og website','Name: '+data.name,'Phone: '+data.phone,'Product: '+(data.product||''),'Message: '+(data.message||'')].join(String.fromCharCode(10)));
+        err.innerHTML='Sorry, we could not send your enquiry. Please <a href="'+wa+'" target="_blank" rel="noopener">send it on WhatsApp</a> instead.';
+        err.style.display='block';
+      }
+      fetch('https://formsubmit.co/ajax/hello@farmog.in',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
+        .then(function(r){return r.json()})
+        .then(function(j){if(j&&(j.success===true||j.success==='true')){form.reset();ok.style.display='block'}else fail()})
+        .catch(fail)
+        .then(function(){btn.disabled=false;btn.innerHTML=label});
     });
   }
   var p=new URLSearchParams(location.search).get('product');

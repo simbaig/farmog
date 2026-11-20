@@ -29,7 +29,11 @@
 <div class="wrap"><span class="eyebrow">Get in Touch</span><h1>Talk to Us Directly.</h1></div></section>
 <section class="intro"><div class="wrap"><p class="lead">We are a small operation and we like it that way. When you reach out, you speak to the people who actually make the product.</p></div></section>
 <section><div class="wrap contact">
- <form id="enquiry" class="rv">
+ <form id="enquiry" class="rv" action="https://formsubmit.co/hello@farmog.in" method="POST">
+  <input type="hidden" name="_subject" value="New enquiry from farmog.in">
+  <input type="hidden" name="_template" value="table">
+  <input type="hidden" name="_next" value="https://farmog.in/contact.html?sent=1">
+  <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
   <h2 style="font-size:2.2rem;margin-bottom:.5rem">Send Us an Enquiry</h2>
   <p class="note" style="margin:0 0 1.8rem">Tell us what you need — product, quantity, delivery area — and we will get back to you within a few hours.</p>
   <div class="row"><div class="f"><label>Your Name</label><input name="name" required></div><div class="f"><label>Email Address</label><input type="email" name="email"></div></div>
@@ -37,7 +41,8 @@
   <div class="f"><label>Product of Interest</label><select name="product"><option value="">Select a product…</option><option>Paneer</option><option>Malai Paneer</option><option>Ghee</option><option>Curd / Dahi</option><option>Butter</option><option>Khoya / Mawa</option><option>Multiple products</option><option>Not sure yet</option></select></div></div>
   <div class="f"><label>Your Message</label><textarea name="message" placeholder="Quantity, delivery area, frequency…"></textarea></div>
   <button class="btn" type="submit">Send Enquiry <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-  <p class="ok">Opening WhatsApp with your enquiry — just press send.</p>
+  <p class="ok">Thank you — your enquiry has been sent. We will get back to you within a few hours.</p>
+  <p class="err"></p>
  </form>
  <aside class="info rv d1">
   <h3>Prefer to Call or WhatsApp?</h3>
